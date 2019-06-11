@@ -1,0 +1,47 @@
+
+#boot {
+	height: 60px;
+	background-color: #E0EDD1;
+	margin-top: 10px;
+}
+#zxlx_top {
+	background-color: #428EDC;
+	height: 29px;
+}
+
+#zxlx_top img {
+	float: left;
+	margin: 3px 5px;
+}
+#zxlx_top div.name {
+	float: left;
+	padding-top: 10px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 100%;
+}
+
+#zxlx_top a {
+	float: right;
+	display: block;
+	margin: 2px;
+	height: 26px;
+	padding: 0px 0px 0px 100px;
+}
+#fd_layer {
+	font-size: 12px;
+	font-family: Tahoma, Geneva, sans-serif;
+	line-height: 22px;
+	color: #444444;
+}
+#fd_layer td {
+	padding: 8px;
+}
+#fd_layer td img {
+	padding-bottom: 10px;
+}
+
+.zu{
+    border-top:3px solid rgb(239, 166, 28);;
+}

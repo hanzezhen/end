@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>西安交通大学医工交叉所</title>
+</head>
+<body>
+    <div>
+    <h1>
+        账户申请成功，请等待审核！
+    </h1>
+        <h2>
+            您的信息如下：
+        </h2>
+    <ul>
+            <li>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+            {{ stu.sname }}
+            </li>
+
+            <li>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+            {{ stu.sidnumber }}
+            </li>
+
+            <li>账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+            {{ stu.susername }}
+            </li>
+
+            <li>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：
+            {{ stu.spassword }}
+            </li>
+
+    </ul>
+        <h3>
+            若要修改，请重新提交！<br>
+
+        </h3>
+    <a href="../home/"> >>>返回登陆界面
+    </a>
+
+    </div>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'montserrat',sans-serif,'Microsoft YaHei';
+        }
+
+        h1{
+            text-align: center;
+            margin-top: 5%;
+            margin-bottom: 10px;
+        }
+        h2{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        ul{
+            margin-left: 46%;
+            text-align: left;
+        }
+        h3{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        a{
+            margin-left: 47%;
+            color: red;
+
+        }
+    </style>
+</body>
+</html>

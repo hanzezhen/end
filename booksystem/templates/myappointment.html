@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="{% static 'js/jQuery.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{% static 'js/baseinfo.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{% static 'js/jquery-ui.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <link rel="stylesheet" href="{% static 'js/jquery-ui.css' %}"/>
+    <link rel="stylesheet" href="{% static 'js/jquery-ui.theme.css' %}"/>
+    <link rel="stylesheet" href="{% static 'js/jquery-ui.structure.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/new/index.css' %}"/>
+
+</head>
+<body>
+
+<div class="header">
+    <div class="webname">
+        <a>
+            Django Appointment
+        </a>
+    </div>
+
+    <div class="search">
+
+    </div>
+
+    <div class="dropdown-content">
+        <a href="/quitlogin/">
+            注销
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="drop1btn">
+        <div class="c1">
+            <i class="fa fa-id-card" aria-hidden="true"></i>
+            &nbsp;欢迎，&nbsp;{{stu.sname}}&nbsp;
+            <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+            &nbsp;
+        </div>
+        <div class="drop1down-c">
+            <a href="/indextest/">返回主页</a>
+        </div>
+    </div>
+</div>
+
+<div class="middle">
+    <div class="middleleft">
+        <ul>
+            <li class="title">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+                工具
+            </li>
+        </ul>
+        <div class="m1">
+            <ul>
+                <span>个人管理</span>
+                <li><a id='xyz1' href="/baseinfo/" class="l1">
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                    基本信息
+                </a></li>
+
+            </ul>
+            <ul>
+                <span>预约管理</span>
+                <li><a id='xyz2' href="#" class="l1">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    我的预约</a></li>
+                <li><a id='xyz3' href="/epappoint/" class="l1">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    实验设备预约</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mmain">
+
+        <div class="mm-information" style="overflow: scroll;max-height:400px">
+            <div class="mm-information-title">
+                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                我的预约
+            </div>
+            <table>
+                <tr>
+                    <th>预约时间</th>
+                    <th>预约设备</th>
+                    <th>设备地点</th>
+                    <th>设备负责人</th>
+                    <th>设备状态</th>
+                    <th>申请取消</th>
+                    <th>签 到</th>
+
+                </tr>
+                {% for item in ep1 %}
+                    <tr>
+                        <td>{{ item.ydate }}&nbsp;{{ item.ytimestart }} -- {{ item.jieshushijian }}</td>
+                        <td>{{ item.yeid.ename }}</td>
+                        <td>{{ item.yeid.eshiyanshi }}</td>
+                        <td>{{ item.yeid.eguanliyuan }}</td>
+
+                        {% if item.yeid.ezhuangtai == True %}
+                            <td><p style="color: green">正常</p></td>
+                        {% else %}
+                            <td><p style="color: indianred">设备故障</p></td>
+                        {% endif %}
+
+                        {% if item.isquxiao == False %}
+                            {% if not item.qiandaoshijian == True %}
+                            <td>
+                                <button id="{{ item.ydate }}an{{ item.yeid.ename }}and{{ item.ytimestart }}">申请取消
+                                </button>
+                            </td>
+                                {% else %}
+                                <td>当前时间不可取消</td>
+                                {% endif %}
+                            {% if item.qiandaoshijian == True %}
+                                {% if item.shiyanfankui %}
+                                    <td>已签到</td>
+                                {% else %}
+                                    <td><a id="{{ item.ydate }}an{{ item.yeid.ename }}and{{ item.ytimestart }}a"
+                                           href="#"
+                                           style="color: white;background-color: #1b54b4;padding-left: 20%;padding-right: 20%">签&nbsp;&nbsp;到</a>
+                                    </td>
+                                {% endif %}
+                            {% else %}
+                                <td>当前时间不可签到</td>
+                            {% endif %}
+                        {% else %}
+                            <td style="color: red;background-color: yellow">已经取消</td>
+                            <td style="color: red;background-color: yellow">已经取消</td>
+
+                        {% endif %}
+
+
+                    </tr>
+                {% endfor %}
+                <script>
+
+                    $(function () {
+
+                        $("#dialog").dialog({
+                            autoOpen: false,
+                            modal:true,
+                            width:600,
+                            show: {
+                                effect: "blind",
+                                duration: 100
+                            },
+                            hide: {
+                                effect: "explode",
+                                duration: 100
+                            },
+                            buttons:{
+                                'confirm': function () {
+                                    var x =$(this).find('p').text();
+                                    var y =$(this).find('textarea').val();
+                                    $.ajax({
+                                        url: '/ajax4get/',
+                                        type: 'POST',
+                                        contentType: 'application/json',
+                                        data: JSON.stringify({
+                                            'username': x,
+                                            'con':y,
+                                        }),
+                                        headers: {'X-CSRFToken': $('[name="csrfmiddlewaretoken"]').val()},
+                                        success: function (data) {
+                                            alert('提交成功，实验顺利');
+                                            $("#dialog").dialog("close");
+                                            var link = $('<p>已签到</p>');
+                                            $("#" + x).hide();
+                                            $("#" + x).after(link);
+                                        },
+                                        error: function () {
+                                            alert('提交失败，请重试');
+                                            $("#dialog").dialog("close");
+                                        }
+                                    })
+
+                                },
+                                'cancel': function () {
+                                    $("#dialog").dialog("close");
+                                }
+                            },
+                        });
+
+                        $("a").click(function () {
+
+                            var x =$(this).attr('id');
+                            if (x !== 'xyz1' && x !== 'xyz2' && x !== 'xyz3'){
+
+                                $("#dialog").find('p').html(''+x);
+
+                                $.ajax({
+                                    url: '/ajax5get/',
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        'username': x
+                                    }),
+                                    headers: {'X-CSRFToken': $('[name="csrfmiddlewaretoken"]').val()},
+                                    success: function (data) {
+                                        var dataObj = JSON.parse(data);
+                                        var a1 = dataObj['nianyue'];
+                                        var a2 = dataObj['shijian'];
+                                        var a3 = dataObj['ename'];
+                                        var cc1 = '<li>预约时间：' + a1 + a2 + '</li>';
+                                        var cc2 = '<li>预约设备：' + a3 + '</li>';
+                                        $("#dialog").find('ul').html('' + cc1 + cc2+'<li>签到信息：(请填写前检查设备状态，如有问题，及时联系管理员)</li>');
+                                    }
+                                });
+
+                                $("#dialog").find('textarea').html('请输入签到信息');
+                                $("#dialog").dialog("open");
+                            };
+                        });
+                    });
+                </script>
+            </table>
+            <style>
+                table {
+                    border-collapse: collapse;
+                    border: 1px solid black;
+                    width: 100%;
+                    margin-top: 1%;
+                }
+
+                td {
+                    border: 1px solid black;
+                    height: 25px;
+                    text-align: center;
+                }
+
+                th {
+                    border: 1px solid black;
+                    height: 20px;
+                    text-align: center;
+                    background-color: gray;
+                    color: white;
+                }
+            </style>
+
+        </div>
+        <div class="mm-information" style="overflow: scroll;max-height: 400px">
+            <div class="mm-information-title">
+                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                历史预约
+            </div>
+            <table>
+                <tr>
+                    <th>预约时间</th>
+                    <th>预约设备</th>
+                    <th>设备地点</th>
+                    <th>设备负责人</th>
+                    <th>是否取消</th>
+                    <th>是否正常履约</th>
+
+                </tr>
+                {% for item in ep2 %}
+                <tr>
+                    <td>{{item.ydate}} {{item.ytimestart}} -- {{item.jieshushijian}}</td>
+                    <td>{{item.yeid.ename}}</td>
+                    <td>{{item.yeid.eshiyanshi}}</td>
+                    <td>{{item.yeid.eguanliyuan}}</td>
+
+
+                    {% if item.isquxiao == True %}
+                    <td style="color: red">您已取消</td>
+                    {% else %}
+                    <td>正常履约</td>
+                    {% endif %}
+
+                    {% if item.isqiandao == True %}
+                    <td style="color: red">您已违约</td>
+                    {% elif item.isqiandao == False %}
+                    <td>正常</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+            <style>
+                table {
+                    border-collapse: collapse;
+                    border: 1px solid black;
+                    width: 100%;
+                    margin-top: 1%;
+                }
+
+                td {
+                    border: 1px solid black;
+                    height: 25px;
+                    text-align: center;
+                }
+
+                th {
+                    border: 1px solid black;
+                    height: 20px;
+                    text-align: center;
+                    background-color: gray;
+                    color: white;
+                }
+            </style>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="footer">
+    <li>
+        <i class="fa fa-university" aria-hidden="true">
+            西安交通大学材料学院实验室预约&nbsp;&nbsp;&nbsp;
+        </i>
+        <i class="fa fa-comments" aria-hidden="true">
+            联系人:徐老师&nbsp;联系方式:xxx-xxxxxx
+        </i>
+    </li>
+</div>
+
+<div id="dialog" title="签到">
+    <p style="display: none"></p>
+    <ul></ul>
+    <textarea rows="3" cols="60"></textarea>
+</div>
+
+<div id="dialog2" title="签到">
+    <p style="display: none"></p>
+    <ul></ul>
+    <textarea rows="3" cols="60"></textarea>
+</div>
+<script>
+    $(":button").click(function () {
+
+        var x = $(this).attr('id');
+        if (x !== '') {
+
+            $("#dialog2").find('p').html('' + x);
+
+            $.ajax({
+                url: '/ajax5get/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    'username': x
+                }),
+                headers: {'X-CSRFToken': $('[name="csrfmiddlewaretoken"]').val()},
+                success: function (data) {
+                    var dataObj = JSON.parse(data);
+                    var a1 = dataObj['nianyue'];
+                    var a2 = dataObj['shijian'];
+                    var a3 = dataObj['ename'];
+                    var cc1 = '<li>预约时间：' + a1 + a2 + '</li>';
+                    var cc2 = '<li>预约设备：' + a3 + '</li>';
+                    $("#dialog2").find('ul').html('' + cc1 + cc2 + '<li>申请原因：(请填写取消此次预约的原因，如有问题，及时联系管理员)</li>');
+                }
+            });
+
+            $("#dialog2").find('textarea').html('请输入申请原因');
+            $("#dialog2").dialog("open");
+        }
+        ;
+    });
+
+
+    $(function () {
+
+        $("#dialog2").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 600,
+            show: {
+                effect: "blind",
+                duration: 100
+            },
+            hide: {
+                effect: "explode",
+                duration: 100
+            },
+            buttons: {
+                'confirm': function () {
+                    var x = $(this).find('p').text();
+                    var y = $(this).find('textarea').val();
+                    $.ajax({
+                        url: '/ajax6get/',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            'username': x,
+                            'con': y,
+                        }),
+                        headers: {'X-CSRFToken': $('[name="csrfmiddlewaretoken"]').val()},
+                        success: function (data) {
+                            alert('已经取消');
+                            $("#dialog2").dialog("close");
+                            var link = $('<p>取消成功</p>');
+                            $("#" + x).hide();
+                            $("#" + x).after(link);
+                        },
+                        error: function () {
+                            alert('提交失败，请重试');
+                            $("#dialog2").dialog("close");
+                        }
+                    })
+
+                },
+                'cancel': function () {
+                    $("#dialog2").dialog("close");
+                }
+            },
+        });})
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link  rel="stylesheet" href="{% static 'css/new/index.css' %}"/>
+    <link  rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <script src="{% static 'js/jQuery.js' %}" type="text/javascript" charset="UTF-8"></script>
+</head>
+<script>
+            $(document).ready(function () {
+                var x = $('#testha').text();
+                if (x > 0) {
+                    alert('您有预约还未签到，请签到')
+                }
+            })
+
+</script>
+<body>
+
+    <div class="header">
+        <div class="webname">
+            <a>
+                Django Appointment
+            </a>
+        </div>
+
+        <div class="search">
+
+        </div>
+
+        <div class="dropdown-content">
+            <a href="/quitlogin/">
+                注销
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="drop1btn">
+            <div class="c1">
+                <i class="fa fa-id-card" aria-hidden="true"></i>
+                欢迎,{{stu.sname}}
+                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+            </div>
+            <div class="drop1down-c">
+                <a href="#">更改密码</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle">
+        <div class="middleleft">
+            <ul>
+                <li class="title">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    工具
+                </li>
+            </ul>
+            <div class="m1">
+                <ul>
+                    <span>个人管理</span>
+                    <li><a href="/baseinfo/" class="l1">
+                        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                        基本信息
+                    </a></li>
+
+                </ul>
+                <ul>
+                    <span>预约管理</span>
+                    <li><a href="/myappointment/" class="l1">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        我的预约</a></li>
+                    <li><a href="/epappoint/" class="l1">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        实验设备预约</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mmain" >
+            <style>
+
+            </style>
+
+            <div class="mm-information">
+                <div class="mm-information-title">
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                        基本信息
+                </div>
+                <ul>
+                    <li>姓&nbsp;名：{{stu.sname}}</li>
+                    <li>学&nbsp;号：{{stu.sid}}</li>
+                    <li>导&nbsp;师：{{stu.steacher}}</li>
+                    <li>邮&nbsp;箱：{{stu.semail}}</li>
+                    <li>电&nbsp;话：{{stu.stelephone}}</li>
+                </ul>
+            </div>
+            <div class="mm-information">
+                <div class="mm-information-title">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        最近预约(只显示最近三项)
+                </div>
+                <div class="table">
+
+                    <table class="gridtable">
+                        <tr>
+                            <th>预约时间</th>
+                            <th>预约设备</th>
+                            <th>设备地点</th>
+                            <th>设备负责人</th>
+                        </tr>
+
+                        {% for item in ep %}
+                        <tr>
+                            <td>{{item.ydate}}&nbsp;{{item.ytimestart}} -- {{item.jieshushijian}}</td>
+                            <td>{{item.yeid.ename}}</td>
+                            <td>{{item.yeid.eshiyanshi}}</td>
+                            <td>{{item.yeid.eguanliyuan}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                <div id="c1"><a href="/myappointment/">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    查看更多
+                </a></div>
+                    <style>
+                        table{
+                            border-collapse: collapse;
+                            border: 1px solid black;
+                            width: 100%;
+                        }
+                        td {
+                            border: 1px solid black;
+                            height:25px;
+                            text-align: center;
+                        }
+                        th {
+                            border: 1px solid black;
+                            height:20px;
+                            text-align: center;
+                            background-color: gray;
+                            color: white;
+                        }
+                    </style>
+                </div>
+            </div>
+            <div class="mm-information">
+                <div class="mm-information-title">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                        常用实验设备
+                </div>
+                {% for item in equip%}
+                    <div class="polaroid">
+                        <img src="../media/img/20190610154357_77.jpg" alt="Norway" style="width:100%">
+                        <div class="container">
+                            <p>{{item.ep}}</p>
+                            {% if item.quanxian == '1'%}
+                               {% if item.ezhuangtai == True %}
+                                    <p style="color: green">正常</p>
+                                    <a href="/appoint{{ item.eid }}/">点击预约</a>
+                                {% else %}
+                                    <p style="color: indianred">设备故障</p>
+                                    <p style="color: indianred">暂时无法使用</p>
+                                {% endif %}
+                            {% endif %}
+                            {% if not item.quanxian == '1'%}
+                                <p style="color: red">无权限预约</p>
+                                <p style="color: red">请联系管理员</p>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="footer">
+        <li>
+            <i class="fa fa-university" aria-hidden="true">
+                西安交通大学材料学院实验室预约&nbsp;&nbsp;&nbsp;
+            </i>
+            <i class="fa fa-comments" aria-hidden="true">
+                联系人:徐老师&nbsp;联系方式:xxx-xxxxxx
+            </i>
+        </li>
+        <p id='testha' style="display: none">{{kk}}</p>
+
+    </div>
+
+</body>
+</html>

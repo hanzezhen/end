@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员界面</title>
+    <script src="/static/js/jQuery.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/foradmin.js" type="text/javascript" charset="UTF-8"></script>
+    <link href="/static/css/admin_style.css" rel="stylesheet" type="text/css" >
+    <link href="/static/css/admin_static.css" rel="stylesheet" type="text/css" >
+    <link href="/static/css/base.css" rel="stylesheet" type="text/css" >
+    <!--<link href="/static/css/dashboard.css" rel="stylesheet" type="text/css" >-->
+
+
+</head>
+<body>
+<div id="header">
+        <div id="branding">
+
+<h1 id="site-name"><span>材料学院设备信息管理系统</span></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+                欢迎，
+                <strong>管理员</strong>.
+
+
+
+                    <a href="/">查看站点</a> /
+
+
+
+
+
+
+                <a href="/admin/password_change/">修改密码</a> /
+
+                <a href="/admin/logout/">注销</a>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="floor" style="width: 76%;margin-left: auto;margin-right: auto;">
+        <div class="neirong_bk2">
+          <div class="icons" id="listd0">
+            <div class="zu">
+                <span class="title" style="width: 100%"><p>申请待审核</p></span>
+          		<div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                    <a class="jhgs" href="../studentquanxian/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	学生权限分配:<span id="number1">{{number1}}</span>
+                	</a>
+                    <a class="jhgs" href="../studentshenqing/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	学生权限批处理
+                	</a>
+                    <a class="xmgs" href="../xiaowaishenqing/" rel="各类科技计划项目申请、立项、评审、验收等阶段的公示情况" style="width:40%;background-color: rgb(200,200,200)">
+                    	校外人员申请人数:<span id="number2">{{number2}}</span>
+                	</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="zu">
+                <span class="title" style="width: 100%"><p>信息管理</p></span>
+                <div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                	<a class="jhgs" href="/admin/myapp/student/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	学生信息修改
+                	</a>
+                    <a class="xmgs" href="/admin/myapp/teacher/" rel="各类科技计划项目申请、立项、评审、验收等阶段的公示情况" style="width:40%;background-color: rgb(200,200,200)">
+                    	老师信息修改
+                	</a>
+                    <a class="xmgs" href="/admin/myapp/equipment/" rel="各类科技计划项目申请、立项、评审、验收等阶段的公示情况" style="width:40%;background-color: rgb(200,200,200)">
+                    	设备信息修改
+                	</a>
+                    <a class="xmgs" href="/admin/myapp/xitongxinxi/" rel="各类科技计划项目申请、立项、评审、验收等阶段的公示情况" style="width:40%;background-color: rgb(200,200,200)">
+                    	系统信息修改
+                	</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+              <div class="zu">
+                <span class="title" style="width: 100%"><p>权限管理</p></span>
+                <div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                	<a class="jhgs" href="/admin/myapp/quanxian/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	学生权限修改
+                	</a>
+                    <a class="jhgs" href="/admin/auth/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	管理员权限修改
+                	</a>
+
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+              <!-- 新加  -->
+            <div class="zu">
+                <span class="title" style="width: 100%"><p>报表查询</p></span>
+                <div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                	<a class="jhgs" href="../weekform/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	本周设备申请
+                	</a>
+                    <a class="jhgs" href="../studentform/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	学生个人申请
+                	</a>
+                    <a class="jhgs" href="../teacherform/" rel="科技计划管理过程公开，信息组织透明，接受公众监督" style="width:40%;background-color: rgb(200,200,200)">
+                    	导师个人申请
+                	</a>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+
+    </div>
+<script>
+        //定时刷新界面（0.5秒）
+
+</script>
+</body>
+</html>

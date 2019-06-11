@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/new/index.css' %}"/>
+    <script src="{% static 'js/jQuery.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <link rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <script src="{% static 'js/baseinfo.js' %}" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="webname">
+        <a>
+            Django Appointment
+        </a>
+    </div>
+
+    <div class="search">
+
+    </div>
+
+    <div class="dropdown-content">
+        <a href="/quitlogin/">
+            注销
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="drop1btn">
+        <div class="c1">
+            <i class="fa fa-id-card" aria-hidden="true"></i>
+            &nbsp;欢迎，&nbsp;{{stu.sname}}&nbsp;
+            <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+            &nbsp;
+        </div>
+        <div class="drop1down-c">
+            <a href="/indextest/">返回主页</a>
+        </div>
+    </div>
+</div>
+
+<div class="middle">
+    <div class="middleleft">
+        <ul>
+            <li class="title">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+                工具
+            </li>
+        </ul>
+        <div class="m1">
+            <ul>
+                <span>个人管理</span>
+                <li><a href="/baseinfo/" class="l1">
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                    基本信息
+                </a></li>
+
+            </ul>
+            <ul>
+                <span>预约管理</span>
+                <li><a href="#" class="l1">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    我的预约</a></li>
+                <li><a href="#" class="l1">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    实验设备预约</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mmain">
+
+        <div class="mm-information">
+            <div class="mm-information-title">
+                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                设备信息
+            </div>
+            <div>
+                <div class="polaroid">
+                    <img src="/static/images/1.jpg" alt="Norway" style="width:100%">
+                    <div class="container">
+                        <p>脑电帽</p>
+                        <p style="color: green">正常</p>
+                    </div>
+                </div>
+                <div style="display: inline-block ;width:50%">
+                    <ul>
+                        <li>设备名称：{{epq.ename}}</li>
+                        <li>设备编号：{{epq.eid}}</li>
+                        <li>设备地点：{{epq.eshiyanshi}}</li>
+                        <li>设备负责人：{{epq.eguanliyuan}}</li>
+                        <li>设备状态：<a style="color:red;">维修中</a></li>
+                        <li>设备介绍：{{epq.ejieshao1}}</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="mm-information">
+            <div class="mm-information-title">
+                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                实验设备预约
+            </div>
+            <table border="1">
+                <tr>
+                    <th>时间\日期</th>
+                    {% for item in date1 %}
+                    <th>
+                        {{ item }}
+                    </th>
+                    {% endfor %}
+                </tr>
+
+
+                <tr>
+                    <td> 7：00 - 8：00</td>
+                    {% for i in yueli1 %}
+                    {% if not i == 0 %}
+                    <td class="wo">
+                        {{ i }}
+                    </td>
+                    {% else %}
+                    <td>
+                        <button value="{{forloop.counter}}and1" onclick="">点击预约</button>
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            <tr>
+                <td> 8：00 - 9：00</td>
+                {% for i in yueli2 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and2" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 9：00 - 10：00</td>
+                {% for i in yueli3 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and3" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 10：00 - 11：00</td>
+                {% for i in yueli4 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and4" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 11：00 - 12：00</td>
+                {% for i in yueli5 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and5" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 12：00 - 13：00</td>
+                {% for i in yueli6 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and6" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 13：00 - 14：00</td>
+                {% for i in yueli7 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and7" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 14：00 - 15：00</td>
+                {% for i in yueli8 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and8" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 15：00 - 16：00</td>
+                {% for i in yueli9 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and9" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 16：00 - 17：00</td>
+                {% for i in yueli10 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and10" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 17：00 - 18：00</td>
+                {% for i in yueli11 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and11" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 18：00 - 19：00</td>
+                {% for i in yueli12 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and12" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 19：00 - 20：00</td>
+                {% for i in yueli13 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and13" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            <tr>
+                <td> 20：00 - 21：00</td>
+                {% for i in yueli14 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and14" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+
+                </tr>
+            <tr>
+                <td> 21：00 - 22：00</td>
+                {% for i in yueli15 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and15" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+
+                </tr>
+                        <tr>
+                <td> 22：00 - 23：00</td>
+                {% for i in yueli16 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and16" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+
+                </tr>
+                        <tr>
+                <td> 23：00 - 24：00</td>
+                {% for i in yueli17 %}
+                {% if not i == 0 %}
+                <td class="wo">
+                    {{ i }}
+                </td>
+                {% else %}
+                <td>
+                    <button value="{{forloop.counter}}and17" onclick="">点击预约</button>
+                </td>
+                {% endif %}
+                {% endfor %}
+
+                </tr>
+
+                <style>
+
+                    .wo{
+                      background-color: yellow;
+                    }
+                </style>
+
+            </table>
+
+            <script>
+                $(document).ready(function () {
+                    $(":button").click(function () {
+                        var val=$(this).attr("value");
+                        $(this).attr("id",val);
+                        var val2=$(this).attr("id");
+                        var a = $("#a123").attr("value");
+                        var b = $("#b123").attr("value");
+                        $.ajax({
+                            url: '/ajax2get/',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                'username': a,
+                                'val': val,
+                                'eid':b,
+                            }),
+                            headers: {'X-CSRFToken': $('[name="csrfmiddlewaretoken"]').val()},
+
+                            success: function (data) {
+                                var dataObj = JSON.parse(data);
+                                if (dataObj['sttr'] == 'yes') {
+                                    $("#"+val2).hide();
+                                    var link = $('<p style="background-color: yellow">'+a+'</p>')
+                                    $("#"+val2).after(link)
+                                    alert('预约成功');
+
+                                }
+                                else if (dataObj['sttr'] == 'no'){
+                                    alert('已经被预约，请刷新后再试')
+                                }
+
+
+
+                            },
+                            error: function(){
+                                alert("预约失败，请重启后再试！")
+                            }
+
+
+                        })
+
+
+                    })
+                })
+
+
+
+
+
+            </script>
+
+
+            <style>
+                table {
+                    border-collapse: collapse;
+                    border: 1px solid black;
+                    width: 100%;
+                }
+
+                td {
+                    border: 1px solid black;
+                    height: 25px;
+                    text-align: center;
+                }
+
+                th {
+                    border: 1px solid black;
+                    height: 20px;
+                    text-align: center;
+                    background-color: gray;
+                    color: white;
+                }
+            </style>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="footer">
+    <li>
+        <i class="fa fa-university" aria-hidden="true">
+            西安交通大学材料学院实验室预约&nbsp;&nbsp;&nbsp;
+        </i>
+        <i class="fa fa-comments" aria-hidden="true">
+            联系人:徐老师&nbsp;联系方式:xxx-xxxxxx
+        </i>
+    </li>
+    <button id="a123" value="{{ username }}"></button>
+    <button id="b123" value="{{eid}}"></button>
+
+</div>
+</body>
+</html>

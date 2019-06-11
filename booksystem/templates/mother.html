@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实验室预约</title>
+    <link  rel="stylesheet" href="{% static 'css/mother.css' %}"/>
+    <link  rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+</head>
+<body>
+    <div class="header">
+        <h2>
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            材料学院实验室预约系统
+        </h2>
+        <ul>
+            <a href="#" class="header-form">基本信息查询</a>
+            <a href="#" class="header-form">实验设备预约</a>
+            <a>{{ susername }}</a>
+            <a>,欢迎您</a>
+            <a href="/quitlogin/" class="header-form">退出</a>
+        </ul>
+    </div>
+
+    <div class="middle">
+        {% block main %}
+
+        {% endblock main %}
+
+    </div>
+
+    <div class="footer">
+        <ul>
+            <li>
+                <i class="fa fa-university" aria-hidden="true">
+                    西安交通大学材料学院实验室预约&nbsp;&nbsp;&nbsp;
+                </i>
+                <i class="fa fa-comments" aria-hidden="true">
+                    联系人:徐老师&nbsp;联系方式:xxx-xxxxxx
+                </i>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

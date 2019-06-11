@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生权限批量处理</title>
+
+    <script src="/static/js/jQuery.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/core.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/table2excel.min.js" type="text/javascript" charset="UTF-8"></script>
+
+    <script src="/static/js/jsi18n.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/calendar.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/DateTimeShortcuts.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/studentform.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/studentshenqing.js" type="text/javascript" charset="UTF-8"></script>
+
+
+    <link href="/static/css/base.css" rel="stylesheet" type="text/css" >
+    <link href="/static/css/widgets.css" rel="stylesheet" type="text/css" >
+
+
+    <style type="text/css">
+
+	body{padding: 0px;margin: 0px;font-size: 12px;font-family: "微软雅黑";}
+	.ui-dialog{
+		width: 380px;height: auto;display: none;
+		position: absolute;z-index: 9000;
+		top: 0px;left: 0px;
+		border: 1px solid #D5D5D5;background: #fff;
+	}
+	.ui-dialog a{text-decoration: none;}
+
+
+
+
+    td{
+        border-left: 1px solid #e6e6e6;
+    }
+    /*鼠标放上去便小手*/
+    a{
+        cursor: pointer;
+
+    }
+
+    a:hover>span{
+        color:rgb(30,80,100);
+    }
+
+
+   #headtr>th>div  > span{
+       padding-left: 0px;
+   }
+   .datetimeshortcuts>a>img{
+       vertical-align: middle;
+   }
+
+</style>
+</head>
+<body>
+<div id="header">
+        <div id="branding">
+<h1 id="site-name"><span style="cursor: default" >材料学院设备信息管理系统</span></h1>
+        </div>
+        <div id="user-tools">
+                <span style="cursor: default">欢迎，</span>
+                <strong style="cursor: default">管理员</strong>.
+                    <a href="/">查看站点</a> /
+                <a href="/admin/password_change/">修改密码</a> /
+                <a href="/admin/logout/">注销</a>
+        </div>
+    </div>
+<div class="breadcrumbs">
+        <a href="/foradmin2/">首页</a>
+            › 学生权限批量处理
+</div>
+<div id="content" class="flex">
+    <h1>学生权限分配</h1>
+
+     <div id="content-main">
+
+     <div id="toolbar">
+         <form id="changelist-search" action="" method="get" onsubmit="return  check1()">
+         <div><!-- DIV needed for valid HTML -->
+             <label for="xuehao"><span>学号:</span></label>
+                <input type="text" size="10" name="xuehao" id="xuehao" value={{querysid}} >
+&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="name"><span>姓名:</span></label>
+                <input type="text" size="10" name="name" id="name" value={{queryname}} >
+&nbsp;&nbsp;&nbsp;&nbsp;
+             <label for="teacher"><span>老师:</span></label>
+                <input type="text" size="10" name="teacher" id="teacher" value={{queryteacher}} >
+
+         </div>
+            <div>
+            <label class="required" for="searchbar0"><span>注册日期:</span></label>
+                <input type="text" class="vDateField" size="10" name="timestart" id="searchbar0" placeholder="2019/01/01" value={{startquery}}>
+
+             <label class="required" for="searchbar1"><span>——</span></label>
+                <input type="text" class="vDateField" size="10" name="timeend" id="searchbar1" placeholder="今天" value={{endquery}}>
+&nbsp;       &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="searchcommit" style="cursor: pointer" type="submit" value="筛选">&nbsp;&nbsp;&nbsp;&nbsp;
+                <a  class="button" href="/studentshenqing/" >全部</a>
+                <input id="errorinfo" style="color:red;border: 0px">
+
+            </div>
+
+         </form>
+     </div>
+     <div style="width: 65%;float: left;">
+     <div id="changelist" class="module">
+     <div id="firsttable" style="max-height: 300px;overflow-y: scroll">
+     <table id="table1" style="width: 100%;">
+       <thead  >
+<tr id="headtr" >
+    <th scope="col" class="action-checkbox-column" style="text-align: center;width: 60px;vertical-align: middle">
+
+   <a style="width: 30px;color: #5b80b2;" href="javascript:quanxuan3();">全选</a>&nbsp;
+            <a style="width: 30px;color: #5b80b2;" href="javascript:fanxuan3();">反选</a>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="">
+   <div class="text"><span style="padding-left: 0px">编号</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="">
+
+   <div class="text"><span id="xuehaoid">学号</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="">
+   <div class="text"><span>姓名</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="">
+   <div class="text"><span>老师</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="">
+   <div class="text"><span>注册日期</span></div>
+   <div class="clear"></div>
+</th>
+
+
+
+</tr>
+</thead>
+       <tbody >
+            {% for student in students %}
+                  {% if forloop.counter|divisibleby:2 %}
+                      <tr class="row2">
+                  {% else %}
+                      <tr class="row1">
+                  {% endif %}
+                <td class="action-checkbox" style="text-align: center"><input class="action-select" name="_selected_action" type="checkbox" onclick="javascript:updatenum()" value="{{student.spk}}"></td>
+                <td scope="row"><a class="suoyin" style="font-weight: bold;color: rgb(92,128,178);font-size: 12px;" ><span>{{student.spk}}</span></a></td>
+                <!--<th scope="row"><span >{{forloop.counter|divisibleby:2}}</span></th>-->
+                <td><span  class="">{{student.sid}}</span></td>
+                <td><span  class="">{{student.sname}}</span></td>
+                <td><span  class="">{{student.teachername}}</span></td>
+
+                <td><span  class="">{{student.time}}</span></td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+     </div>
+     </div>
+
+
+
+
+     </div>
+
+
+
+
+
+     <div style="width: 20%;float: right;margin-right: 14%;">
+        <div style="width: 100%;height: 30px;">
+            <div id="pichuli" style="width: 50%;height:100%;float: left;text-align: center;background-color:#4b9aeb"><p style="font-size: 1.2em;margin-bottom: 0;-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;">批量处理</p></div>
+            <div id="dangechuli" style="width: 50%;height:100%;float: right;text-align: center;background-color: #dddddd"><p style="font-size: 1.2em;margin-bottom: 0;-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;">单个处理</p></div>
+        </div>
+
+    <div id="dangediv" style="width: 100%;display: none">
+        <div class="ui-dialog-content" style="border: 1px solid #bbbbbb;padding: 5px;">
+        <p style="text-align: center">学号：<span id="stuid"></span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生：<span id="stuname"></span></p>
+		<div style="width: 100%">
+             <dl class="checkBox">
+        <dt>
+            <a href="javascript:quanxuan1();">全选</a>
+            <a href="javascript:fanxuan1();">反选</a>
+        </dt>
+        <dd>
+
+            {% for items in equipments %}
+                <p style="width: 100%;display: block">
+                    {% for item in items %}
+            <p style="width: 30%;display: inline-block"><input  type="checkbox" name="item1" value={{item.eid}}><label >{{item.ename}}</label></p>
+                    {% endfor %}
+                </p>
+            {%  endfor %}
+
+        </dd>
+    </dl>
+        </div>
+<br>
+		<p style="display: block">
+			<button class="ui-dialog-submit" style="display:inline-block;width:30%;color:#2e6da4;" onclick="javascript:chongxinfenpei1()" >重新分配</button>&nbsp;&nbsp;
+			<button class="ui-dialog-submit" style="display:inline-block;width:30%;color:#2e6da4;" onclick="javascript:tianjia1()" >添加权限</button>&nbsp;&nbsp;
+			<button class="ui-dialog-submit" style="display:inline-block;width:30%;color:#2e6da4;" onclick="javascript:shanchu1()" >删除权限</button>
+		</p>
+
+
+
+	</div>
+    </div>
+
+
+
+
+    <div id="piliangdiv" style="width: 100%;display: block">
+        <div class="ui-dialog-content" style="border: 1px solid #bbbbbb;padding: 5px;">
+        <p style="text-align: center">已选择<span id="stunum">0</span>个学生</p>
+		<div style="width: 100%">
+             <dl class="checkBox">
+        <dt>
+            <a href="javascript:quanxuan2();">全选</a>
+            <a href="javascript:fanxuan2();">反选</a>
+        </dt>
+        <dd style="width: 100%" >
+
+            {% for items in equipments %}
+                <p style="width: 100%;display: block">
+                    {% for item in items %}
+            <p style="width: 30%;display: inline-block"><input  type="checkbox" name="item2" value={{item.eid}}><label >{{item.ename}}</label></p>
+                    {% endfor %}
+                </p>
+            {%  endfor %}
+
+        </dd>
+    </dl>
+        </div>
+<br>
+		<p style="display: block">
+			<button class="ui-dialog-submit" style="display:inline-block;width:30%;color:#2e6da4;" onclick="javascript:chongxinfenpei2()" >重新分配</button>&nbsp;&nbsp;
+			<button class="ui-dialog-submit" style="display:inline-block;width:30%;color:#2e6da4;" onclick="javascript:tianjia2()" >添加权限</button>&nbsp;&nbsp;
+			<button class="ui-dialog-submit" style="display:inline-block;width:30%;color:#2e6da4;" onclick="javascript:shanchu2()" >删除权限</button>
+		</p>
+
+
+
+	</div>
+    </div>
+        <div id="rizhi" style="width: 100%;">
+
+        </div>
+        </div>
+
+
+        </div>
+
+
+
+
+</div>
+
+
+
+<script>
+    $(function(){
+    $("#table1").on("click", ".suoyin", function(event){
+        var stuidstr=$.trim($(this).closest("tr").find("td").eq(2).find("span").eq(0).text());
+        $("#stuname").text($(this).closest("tr").find("td").eq(3).find("span").eq(0).text());
+        $("#stuid").text($(this).closest("tr").find("td").eq(2).find("span").eq(0).text());
+        $("#piliangdiv").css("display","none")
+        $("#dangediv").css("display","block")
+        $("#pichuli").css("background-color","#dddddd")
+        $("#dangechuli").css("background-color","#4b9aeb")
+        $.post(
+        	"/stusqupdateepi/",
+			JSON.stringify({"stuidstr":stuidstr}),
+			function(data){
+        	    var values=data["data"]
+                var item=document.getElementsByName("item1")
+                for(k=0;k<item.length;k++){
+                    item[k].checked=false
+                }
+                for (i=0;i<item.length;i++){
+                     num=0
+		             for(j=0;j<values.length;j++){
+                        if(item[i].value==values[j]){
+                            item[i].checked=true
+                            num=1
+                        }
+                        if(num==0){
+                            item[i].checked=false
+                        }
+                    }
+		        }
+			},
+			"json"
+			);
+
+    });
+
+
+});
+
+
+</script>
+</body>
+</html>

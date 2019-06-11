@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员界面</title>
+    <script src="/static/js/jQuery.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/foradmin.js" type="text/javascript" charset="UTF-8"></script>
+    <link href="/static/css/admin_style.css" rel="stylesheet" type="text/css" >
+    <!--<link href="/static/css/admin_static.css" rel="stylesheet" type="text/css" >-->
+    <link href="/static/css/base.css" rel="stylesheet" type="text/css" >
+    <!--<link href="/static/css/dashboard.css" rel="stylesheet" type="text/css" >-->
+    <style>
+        .floor{
+            height: 800px;
+            width: 10%;
+            display: inline-block;
+            background-color: whitesmoke;
+            color: SlateGray;
+            margin-left: 2%;
+            margin-right: 1%;
+            margin-top: 1%;
+            margin-bottom: 1%;
+            padding: 1% 1% 1% 1%;
+            border-radius: 5px;
+            border-width: medium;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+            vertical-align: top;
+        }
+
+        #rightdiv{
+            height: 800px;
+            width: 82%;
+            display: inline-block;
+
+            color: SlateGray;
+
+            margin-right: 2%;
+            margin-top: 1%;
+            margin-bottom: 1%;
+            padding: 1% 1% 1% 1%;
+            border-radius: 5px;
+            border-width: medium;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+            vertical-align: top;
+        }
+
+        .mm-information{
+            background-color: #eee;
+
+        }
+
+        .neirong_bk2{
+            margin: 0;
+            padding: 0;
+            font-family: 'montserrat', sans-serif, 'Microsoft YaHei';
+            text-decoration: none;
+            list-style: none;
+            font-style: unset;
+        }
+
+        .yw2 > li {
+
+            line-height: 30px;
+
+        }
+
+        .title{
+            font-size: 1.4em;
+        }
+
+        .jhgs{
+            font-size: 1.3em;
+        }
+
+        .yw2{
+            margin: 0;
+
+            padding: 0;
+
+            font-family: 'montserrat', sans-serif, 'Microsoft YaHei';
+
+            text-decoration: none;
+
+            list-style: none;
+
+            font-style: unset;
+        }
+
+        .zu > .yw2 >li{
+            list-style: none;
+            padding-left: 10px;
+            margin-bottom: 5px;
+            /*background-color: yellow;*/
+        }
+
+        .zu > .yw2 >li:hover{
+            background-color: #0e73db;
+            color:white;
+        }
+
+        tr{
+            color: black;
+        }
+
+
+        thead tr{
+            background-color: #e1e1e1;
+            color: black;
+        }
+
+        td{
+            vertical-align: middle;
+
+        }
+
+
+
+
+
+
+
+        .ui-dialog{
+		width: 380px;height: auto;display: none;
+		position: absolute;z-index: 9000;
+		top: 0px;left: 0px;
+		border: 1px solid #D5D5D5;background: #fff;
+	}
+	.ui-dialog a{text-decoration: none;}
+	.ui-dialog-title{
+		height: 48px;line-height: 48px; padding:0px 20px;color: #535353;font-size: 16px;
+		border-bottom: 1px solid #efefef;background: #f5f5f5;
+		cursor: move;
+		user-select:none;
+	}
+	.ui-dialog-closebutton{
+		width: 16px;height: 16px;display: block;
+		position: absolute;top: 12px;right: 20px;
+		background: url(../static/images/close_def.png) no-repeat;cursor: pointer;
+	}
+	.ui-dialog-closebutton:hover{background:url(../static/images/close_hov.png);}
+
+	.ui-dialog-content{
+		padding: 15px 20px;
+	}
+	.ui-dialog-submit{
+		width: 100%;height: 50px;background: #3b7ae3;border:none;font-size: 16px;color: #fff;
+		outline: none;text-decoration: none;
+		display: block;text-align: center;line-height: 50px;
+	}
+	.ui-dialog-submit:hover{
+		background: #3f81b0;
+	}
+	.ui-mask{
+		width: 100%;height:100%;background: #000;
+		position: absolute;top: 0px;height: 0px;z-index: 8000;
+		opacity:0.4; filter: Alpha(opacity=40);
+	}
+
+
+
+
+    /*鼠标放上去便小手*/
+    a{
+        cursor: pointer;
+    }
+
+   tr>th>div  > span{
+       padding-left: 0px;
+       color: #666;
+   }
+    </style>
+</head>
+<body>
+
+<div id="header">
+        <div id="branding">
+
+<h1 id="site-name"><span>材料学院设备信息管理系统</span></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+                欢迎，
+                <strong>管理员</strong>.
+
+
+
+                    <a href="/">查看站点</a> /
+
+
+
+
+
+
+                <a href="/admin/password_change/">修改密码</a> /
+
+                <a href="/admin/logout/">注销</a>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+ <div style="width: 100%;display: block">
+    <div class="floor" style="width: 10%;float: left;margin-left: 10px;display: inline-block">
+        <div class="neirong_bk2">
+          <div class="icons" id="listd0">
+            <div class="zu">
+                <span class="title" style="width: 100%"><p>申请待审核</p></span>
+          		<div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                    <li><a class="jhgs" href="../studentquanxian/" >
+                    	学生权限分配:<span id="number1">{{number1}}</span>
+                	</a></li>
+                    <li><a class="jhgs" href="../studentshenqing/"  >
+                    	学生权限批处理
+                	</a></li>
+                    <li><a class="jhgs" href="../shebeizhuangtai/" >
+                    	设备状态更改
+                	</a></li>
+                    <!--<li><a class="jhgs" href="../xiaowaishenqing/"  >-->
+                    	<!--校外人员申请人数:<span id="number2">{{number2}}</span>-->
+                	<!--</a></li>-->
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="zu">
+                <span class="title" style="width: 100%"><p>基本信息管理</p></span>
+                <div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                	<li><a class="jhgs" href="/admin/myapp/student/" >
+                    	学生信息修改
+                	</a></li>
+                    <li><a class="jhgs" href="/admin/myapp/teacher/" >
+                    	老师信息修改
+                	</a></li>
+                    <li><a class="jhgs" href="/admin/myapp/equipment/" >
+                    	设备信息修改
+                	</a></li>
+                    <li><a class="jhgs" href="/admin/myapp/xitongxinxi/" >
+                    	系统信息修改
+                	</a></li>
+                    <li><a class="jhgs" href="/admin/auth/" >
+                    	管理员权限修改
+                	</a></li>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+
+              <div class="zu">
+                <span class="title" style="width: 100%"><p>预约信息管理</p></span>
+                <div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+                	<li><a class="jhgs" href="/admin/myapp/yuyue/" >
+                    	预约信息修改
+                	</a></li>
+
+                    <li><a class="jhgs" href="/weiyuecishu/" >
+                    	违约次数查看
+                	</a></li>
+
+
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+
+
+              <!-- 新加  -->
+            <div class="zu">
+                <span class="title" style="width: 100%"><p>报表查询</p></span>
+                <div class="yw2" style="width: 100%;margin: 0 0;padding: 0 0">
+
+                	<li><a class="jhgs" href="../weekform/" >
+                    	本周设备申请
+                	</a></li>
+                    <li><a class="jhgs" href="../studentform/" >
+                    	学生个人申请
+                	</a></li>
+                    <li><a class="jhgs" href="../teacherform/" >
+                    	导师个人申请
+                	</a></li>
+                    <li><a class="jhgs" href="../shebeiform/" >
+                    	设备使用记录
+                	</a></li>
+
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+
+    </div>
+
+
+   <div id="rightdiv" >
+
+
+
+
+       <div class="mm-information">
+                <div class="mm-information-title" style="font-size: 18px;color: #666;padding: 0 6px 0 0;margin: 0 0 .2em 0;">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        &nbsp;&nbsp;学生权限分配
+
+                    <div style="display: inline-block;float: right;margin-right: 10px;margin-bottom:0px;margin-top:8px;font-size: 0.7em;vertical-align: bottom" id="c1"><a href="/studentquanxian/">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    >>查看更多
+                </a></div>
+                </div>
+                <div class="table" >
+
+                    <table id="table1" class="gridtable">
+                        <thead>
+                            <th style="width: 5%">编号</th>
+                            <th style="width: 15%">学号</th>
+                            <th style="width: 10%">姓名</th>
+                            <th style="width: 15%">邮箱</th>
+                            <th style="width: 15%">电话</th>
+                            <th style="width: 10%">老师</th>
+                            <th style="width: 15%">注册时间</th>
+                            <th style="width: 15%">审核</th>
+
+
+                        </thead>
+
+<tbody>
+                        {% for student in students %}
+
+
+                  {% if forloop.counter|divisibleby:2 %}
+                      <tr class="row2">
+                  {% else %}
+                      <tr class="row1">
+                  {% endif %}
+
+
+
+
+                <td scope="row" style="border-left: 0"><span >{{student.pk}}</span></td>
+                <!--<th scope="row"><span >{{forloop.counter|divisibleby:2}}</span></th>-->
+
+
+                <td><span  class="">{{student.sid}}</span></td>
+
+                <td><span  class="">{{student.sname}}</span></td>
+                <td><span  class="">{{student.semail}}</span></td>
+                <td><span  class="">{{student.stelephone}}</span></td>
+
+
+
+
+
+                <td><span  class="">{{student.steacher}}</span></td>
+                <td><span  class="">{{student.time}}</span></td>
+
+                <td><a class="fenpeibtn1" style="color: blue;">权限分配</a>&nbsp;
+                    <a class="gezhi1" style="color: blue;" >搁置</a>&nbsp;
+                    <a class="butongguo" style="color: blue;" >不通过</a>
+                </td>
+
+
+
+                </tr>
+            {% endfor %}
+
+
+
+                    </tbody></table>
+
+
+                </div>
+
+            </div><br/><br/>
+
+       <div class="mm-information">
+           <div class="mm-information-title" style="font-size: 18px;color: #666;padding: 0 6px 0 0;margin: 0 0 .2em 0;">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        &nbsp;&nbsp;设备状态更改
+
+                    <div style="display: inline-block;float: right;margin-right: 10px;margin-bottom:0px;margin-top:8px;font-size: 0.7em;vertical-align: bottom" id="c2"><a href="/shebeizhuangtai/">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    >>查看更多
+                </a></div>
+                </div>
+                <div class="table" >
+
+                    <table id="table2" style="width: 100%">
+            <thead>
+<tr id="headtr">
+<th scope="col" class="" style="width: 5%">
+   <div class="text"><span style="padding-left: 0px">编号</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 15%">
+
+   <div class="text"><span id="xuehaoid">设备</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 10%">
+   <div class="text"><span>实验室</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 15%">
+   <div class="text"><span>限时</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 15%">
+   <div class="text"><span>用时</span></div>
+   <div class="clear"></div>
+</th>
+
+    <th scope="col" class="" style="width: 10%">
+   <div class="text"><span>剩余时长</span></div>
+   <div class="clear"></div>
+</th>
+
+    <th scope="col" class="" style="width: 15%">
+   <div class="text"><span>状态</span></div>
+   <div class="clear"></div>
+</th>
+
+<th scope="col" class="" style="width: 15%">
+   <div class="text"><span>修改状态</span></div>
+   <div class="clear"></div>
+</th>
+</tr>
+
+</thead>
+            <tbody>
+
+            {% for shebei in shichang %}
+
+
+                  {% if forloop.counter|divisibleby:2 %}
+                      <tr class="row2">
+                  {% else %}
+                      <tr class="row1">
+                  {% endif %}
+
+
+
+
+                <td scope="row" style="border-left: 0"><span >{{shebei.eid}}</span></td>
+
+
+                <td><span  class="">{{shebei.ename}}</span></td>
+
+                <td><span  class="">{{shebei.eshiyanshi}}</span></td>
+                <td><span  class="">{{shebei.exianshi}}</span></td>
+                <td><span  class="">{{shebei.sum_shichang}}</span></td>
+                <td ><span  class="" >{{shebei.shengshi}}</span></td>
+
+
+
+
+
+                <td><span  class="">{{shebei.ezhuangtai}}</span></td>
+
+                <td><a class="zhengchang" style="color: blue;">正常</a>&nbsp;
+                    <a class="weixiu" style="color: blue;" >维修中</a>&nbsp;
+                </td>
+
+
+
+                </tr>
+            {% endfor %}
+
+
+
+        </tbody>
+     </table>
+
+                    <style>
+                        table{
+                            border-collapse: collapse;
+
+                            width: 100%;
+                        }
+                        td {
+
+                            border-left: 1px solid #e6e6e6;
+
+                            height:25px;
+                            text-align: center;
+                        }
+                        th {
+
+                            height:20px;
+                            text-align: center;
+                            background-color: gray;
+                            color: white;
+                        }
+                    </style>
+                </div>
+
+
+
+       </div><br/><br/>
+
+       <div class="mm-information">
+                <div class="mm-information-title" style="font-size: 18px;color: #666;padding: 0 6px 0 0;margin: 0 0 .2em 0;">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        &nbsp;&nbsp;违约次数统计
+
+                    <div style="display: inline-block;float: right;margin-right: 10px;margin-bottom:0px;margin-top:8px;font-size: 0.7em;vertical-align: bottom" id="c3"><a href="/weiyuecishu/">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    >>查看更多
+                </a></div>
+                </div>
+                <div class="table" >
+
+                    <table id="table3" style="width: 100%">
+            <thead>
+<tr id="headtr3">
+<th scope="col" class="" style="width: 5%">
+   <div class="text"><span style="padding-left: 0px">编号</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 15%">
+
+   <div class="text"><span id="xuehaoid3">学号</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 10%">
+   <div class="text"><span>姓名</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 15%">
+   <div class="text"><span>邮箱</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="" style="width: 15%">
+   <div class="text"><span>电话</span></div>
+   <div class="clear"></div>
+</th>
+
+    <th scope="col" class="" style="width: 10%">
+   <div class="text"><span>预约设备</span></div>
+   <div class="clear"></div>
+</th>
+
+
+    <th scope="col" class="" style="width: 15%">
+   <div class="text"><span>预约日期</span></div>
+   <div class="clear"></div>
+</th>
+
+    <th scope="col" class="" style="width: 15%">
+   <div class="text"><span>违约总次数</span></div>
+   <div class="clear"></div>
+</th>
+
+<!--<th scope="col" class="">-->
+   <!--<div class="text"><span>邮箱提醒</span></div>-->
+   <!--<div class="clear"></div>-->
+<!--</th>-->
+</tr>
+
+</thead>
+            <tbody>
+
+            {% for weiyue in weiyueinfos %}
+
+
+                  {% if forloop.counter|divisibleby:2 %}
+                      <tr class="row2">
+                  {% else %}
+                      <tr class="row1">
+                  {% endif %}
+
+
+
+
+                <td scope="row" style="border-left: 0"><span >{{weiyue.id}}</span></td>
+
+
+                <td><span  class="">{{weiyue.sid}}</span></td>
+
+                <td><span  class="">{{weiyue.sname}}</span></td>
+                <td><span  class="">{{weiyue.semail}}</span></td>
+                <td><span  class="">{{weiyue.stelephone}}</span></td>
+                <td><span  class="">{{weiyue.ename}}</span></td>
+                <td><span  class="">{{weiyue.ydate}}</span></td>
+                <td><span  class="">{{weiyue.weiyuecishu}}</span></td>
+
+
+
+
+
+
+
+                <!--<td><a class="sendEmail" style="color: blue;">邮箱提醒</a>&nbsp;-->
+
+                <!--</td>-->
+
+
+
+                </tr>
+            {% endfor %}
+
+
+
+        </tbody>
+     </table>
+
+
+                </div>
+
+            </div>
+
+
+
+   </div>
+
+     <div class="ui-mask" id="mask" onselectstart="return false"></div>
+
+         <div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
+	     <div class="ui-dialog-title" id="dialogDrag"  onselectstart="return false;" >
+
+		学生权限分配
+
+		<a class="ui-dialog-closebutton" href="javascript:hideDialog();"></a>
+
+	</div>
+	<div class="ui-dialog-content">
+        <p>学号：<span id="stuid"></span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生：<span id="stuname"></span></p>
+		<div style="width: 100%">
+             <dl class="checkBox">
+        <dt>
+            <a href="javascript:quanxuan();">全选</a>
+            <a href="javascript:fanxuan();">反选</a>
+        </dt>
+        <dd>
+
+            {% for equipment in equipments %}
+                <p><input type="checkbox" name="item" value="{{equipment.eid}}"><label>{{equipment.ename}}</label></p>
+            {%  endfor %}
+
+        </dd>
+    </dl>
+        </div>
+
+		<div>
+			<a class="ui-dialog-submit" style="color:#2e6da4" href="javascript:mycommit()" >确认</a>
+		</div>
+
+	</div>
+</div>
+     </div>
+
+<script type="text/javascript" src="/static/js/quanxiantanchuang.js"  charset="UTF-8"></script>
+<script>
+    $(function(){
+    $("#table1").on("click", ".fenpeibtn1", function(event){
+
+        $("#stuname").text($(this).closest("tr").find("td").eq(2).find("span").eq(0).text());
+        $("#stuid").text($(this).closest("tr").find("td").eq(1).find("span").eq(0).text());
+        heretr=$(this).closest("tr")
+        window.heretr=heretr
+        showDialog();
+
+    });
+
+    $("#table1").on("click", ".gezhi1", function(event){
+
+
+        var stuid=$(this).closest("tr").find("td").eq(1).find("span").eq(0).text();
+
+        heretr=$(this).closest("tr")
+        window.heretr=heretr//全局变量
+        gezhi(stuid);
+
+    });
+
+    $("#table1").on("click", ".butongguo", function(event){
+
+
+        var stuid=$(this).closest("tr").find("td").eq(1).find("span").eq(0).text();
+        heretr=$(this).closest("tr")
+        window.heretr=heretr//全局变量
+        butongguo(stuid);
+
+    });
+
+
+
+    $("#table2").on("click", ".zhengchang", function(event){
+
+        var zhuangtai=$(this).closest("tr").find("td").eq(6).find("span").eq(0).text()
+        if(zhuangtai!="正常"){
+            $(this).closest("tr").find("td").eq(6).find("span").eq(0).text("正常");
+
+            eid=$.trim($(this).closest("tr").find("td").eq(0).find("span").eq(0).text());
+            $.post(
+                "/zhengchang/",
+                JSON.stringify({"eid":eid}),
+                function(data){
+
+                    alert(data['data'])
+
+                },
+                "json"
+            );
+        }
+
+
+
+
+    });
+
+    $("#table2").on("click", ".weixiu", function(event){
+        var zhuangtai=$(this).closest("tr").find("td").eq(6).find("span").eq(0).text()
+        if(zhuangtai!="维修中"){
+            $(this).closest("tr").find("td").eq(6).find("span").eq(0).text("维修中");
+
+            eid=$.trim($(this).closest("tr").find("td").eq(0).find("span").eq(0).text());
+            $.post(
+                "/weixiu/",
+                JSON.stringify({"eid":eid}),
+                function(data){
+                    alert(data["data"])
+                },
+                "json"
+            );
+        }
+
+
+
+
+    });
+
+
+});
+
+
+</script>
+
+
+</body>
+</html>

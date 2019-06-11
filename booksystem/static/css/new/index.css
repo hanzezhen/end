@@ -1,0 +1,241 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'montserrat', sans-serif, 'Microsoft YaHei';
+    text-decoration: none;
+    list-style: none;
+    font-style:unset;
+}
+
+
+.header{
+    background: black;
+}
+
+.webname{
+    color: darkgrey;
+    display: inline-block;
+    padding-bottom:15px ;
+    padding-top: 15px;
+}
+.webname a{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.webname:hover{
+    color: white;
+    cursor: pointer;
+    background-color: darkslateblue;
+}
+
+
+.search{
+    display: inline-block;
+    padding-bottom:15px ;
+    padding-top: 15px;
+}
+
+
+
+.drop1btn{
+    display: inline-block;
+    text-decoration: none;
+    background-color: black;
+    color: darkgrey;
+    border: none;
+    float: right;
+}
+.c1{
+    padding: 15px 15px 15px 15px;
+}
+.drop1btn:hover{
+    color: white;
+    cursor:pointer;
+    background-color: darkslateblue;
+
+}
+.drop1btn:hover .drop1down-c{
+    display: block;
+    color: black;
+    background-color: white;
+}
+
+.dropdown-content{
+    color: darkgrey;
+    display: inline-block;
+    padding-bottom:15px ;
+    padding-top: 15px;
+
+    float: right;
+}
+.dropdown-content:hover{
+    color: white;
+    cursor: pointer;
+    background-color: darkslateblue;
+}
+.dropdown-content a{
+    color: darkgrey;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.dropdown-content a:hover{
+    color: white;
+}
+.drop1down-c{
+    position: absolute;
+    display: none;
+    color: white;
+    padding: 15px 110px 15px 15px;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.middle{
+
+}
+.mmain{
+    float:right;
+    display: inline-block;
+    width: 82%;
+    margin-top:1% ;
+    margin-right: 1%;
+    vertical-align: top;
+}
+.mm1{
+    float: top;
+    border-radius: 5px;
+    border-width: medium;
+    box-shadow:0 0 8px 0 rgba(0, 0, 0, 0.2);
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: white;
+    background-color: mediumseagreen;
+    margin-right: 2%;
+
+}
+.mm1-1{
+    display: inline-block;
+}
+.mm-information{
+    margin-bottom: 1.5%;
+    margin-right: 2%;
+    border-radius: 5px;
+    border-width: medium;
+    box-shadow:0 0 8px 0 rgba(0, 0, 0, 0.2);
+    padding-bottom: 1%;
+    background-color: whitesmoke;
+    font-weight: bold;
+}
+.mm-information-title{
+    padding-left: 3%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    background-color:mediumseagreen ;
+    border-top-left-radius:5px ;
+    border-top-right-radius:5px ;
+    color: white;
+
+}
+.mm-information li{
+    padding-left: 3%;
+    padding-top: 3px;
+}
+
+
+
+.middleleft{
+    height: 800px;
+    width: 10%;
+    display: inline-block;
+    background-color: whitesmoke;
+    color: SlateGray;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 1% 1% 1% 1%;
+    border-radius: 5px;
+    border-width: medium;
+    box-shadow:0 0 8px 0 rgba(0, 0, 0, 0.2);
+    vertical-align: top;
+}
+.title{
+    color:seagreen;
+    padding-top:10%;
+    padding-bottom:10%;
+    padding-left: 6%;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.m1 li{
+    color:mediumseagreen;
+    font-weight: bold;
+    padding-top:4%;
+    padding-bottom:4%;
+    padding-left: 6%;
+    border-radius: 5px;
+
+}
+.m1 li:hover{
+    background-color:dodgerblue;
+}
+.m1 li:hover .l1{
+    color:white;
+}
+.m1 span{
+    padding-left: 6%;
+}
+.l1{
+    color:seagreen ;
+}
+
+
+#c1{
+    margin-left: 45%;
+    margin-top: 0.3%;
+}
+
+#c1 a{
+    color: black;
+}
+
+
+div.polaroid {
+    display: inline-block;
+    width: 15.5%;
+    height: 15%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 10px;
+    margin-left: 0.8%;
+}
+
+div.container {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+
+#change1{
+    display: none;
+}
+
+.footer{
+
+    padding-top: 20px ;
+    padding-bottom: 50px ;
+    text-align: center;
+    border-top-style: solid;
+    border-top-color: lightgrey;
+    border-top-width: thin;
+
+}
+
+.footer ul{
+
+    color: black;
+    margin-bottom: 10px;
+}
+

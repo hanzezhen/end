@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="{% static 'js/jQuery.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{% static 'js/baseinfo.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{% static 'js/usernam.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <link rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/new/index.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/buttons.css' %}"/>
+
+
+</head>
+<body>
+
+
+<div class="header">
+    <div class="webname">
+        <a>
+            Django Appointment
+        </a>
+    </div>
+
+    <div class="search">
+
+    </div>
+
+    <div class="dropdown-content">
+        <a href="/quitlogin/">
+            返回
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="drop1btn">
+        <div class="c1">
+            <i class="fa fa-id-card" aria-hidden="true"></i>
+            &nbsp;欢迎注册
+
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="middle">
+    {% csrf_token %}
+    <style>
+        .middle {
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 1.8%;
+            margin-bottom: 2.2%;
+        }
+
+        .middle div {
+            background-color: whitesmoke;
+            border-radius: 5px;
+            border-width: medium;
+            box-shadow: 8px 0 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 0.5% 1% 0.5% 1%;
+            padding: 1% 1% 1% 1%;
+        }
+    </style>
+    <div>
+        <h1>{{stu.sname}},恭喜你注册成功!</h1>
+        <h1>请使用<span style="color: red">{{stu.sid}}</span>作为用户名登陆！</h1>
+
+    </div>
+</div>
+
+
+<div class="footer">
+    <li>
+        <i class="fa fa-university" aria-hidden="true">
+            西安交通大学材料学院实验室预约&nbsp;&nbsp;&nbsp;
+        </i>
+        <i class="fa fa-comments" aria-hidden="true">
+            联系人:徐老师&nbsp;联系方式:xxx-xxxxxx
+        </i>
+    </li>
+</div>
+</body>
+</html>

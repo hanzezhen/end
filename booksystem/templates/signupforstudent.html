@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static from staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>学生登录</title>
+
+    <script src="{% static 'js/jQuery.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#submitfor").click(function () {
+                var name=$("#name").val()
+                var sid=$("#sid").val()
+                var teacher=$("#teacher").val()
+                var email=$("#email").val()
+                var telephone=$("#telephone").val()
+                alert(name+"#"+sid+"#"+teacher+"#"+email+"#"+telephone)
+                $.post("/signpass/",
+                {'name':name,'sid':sid,'teacher':teacher,'email':email,'telephone':telephone},
+                    function(data){
+                         // if(data['data']=='yes'){
+                         //  $("#submitfor").val(name+",提交成功,等待审核")
+                        alert(data+"987")
+
+                    },
+                    "json")
+
+
+
+                // $.post("/signpass/",
+                //   {'name':name,'school':school,'phone':phone,'input_time':mytime,'beizhu':beizhu},
+                //   function(data){
+                //        if(data['data']=='new'){
+                //           $("#success").text(name+",提交成功")
+                //        }
+                //        else if(data['data']=='update'){
+                //           $("#success").text(name+",修改成功")
+                //        }
+                //
+                //   },"json")
+                //
+
+
+            });
+
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form class="row">
+
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 col-lg-2"  for="name" >姓名</label>
+                    <div class="col-sm-10 col-xs-10 col-lg-10">
+                        <input type="text" id="name" class="form-control">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 col-lg-2"  for="sid" >学号</label>
+                    <div class="col-sm-10 col-xs-10 col-lg-10">
+                        <input type="text" id="sid" class="form-control">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 col-lg-2"  for="teacher" >导师</label>
+                    <div class="col-sm-10 col-xs-10 col-lg-10">
+                        <input type="text" id="teacher" class="form-control">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 col-lg-2"  for="email" >邮箱</label>
+                    <div class="col-sm-10 col-xs-10 col-lg-10">
+                        <input type="email" id="email" class="form-control">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 col-lg-2"  for="telephone" >电话</label>
+                    <div class="col-sm-10 col-xs-10 col-lg-10">
+                        <input type="tel" id="telephone" class="form-control">
+                    </div>
+            </div>
+
+            <div class="col-sm-12 col-xs-12 col-lg-12">
+                <input   type="submit" id="submitfor" value="点击提交">
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

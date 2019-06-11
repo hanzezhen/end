@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link  rel="stylesheet" href="{% static 'css/new/index.css' %}"/>
+    <script src="{% static 'js/jQuery.js' %}" type="text/javascript" charset="UTF-8"></script>
+    <link  rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <script src="{% static 'js/baseinfo.js' %}" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+
+    <div class="header">
+        <div class="webname">
+            <a>
+                Django Appointment
+            </a>
+        </div>
+
+        <div class="search">
+
+        </div>
+
+        <div class="dropdown-content">
+            <a href="/quitlogin/">
+                注销
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="drop1btn">
+            <div class="c1">
+                <i class="fa fa-id-card" aria-hidden="true"></i>
+                &nbsp;欢迎，&nbsp;{{stu.sname}}&nbsp;
+                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                &nbsp;
+            </div>
+            <div class="drop1down-c">
+                <a href="/indextest/">返回主页</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle">
+        <div class="middleleft">
+            <ul>
+                <li class="title">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    工具
+                </li>
+            </ul>
+            <div class="m1">
+                <ul>
+                    <span>个人管理</span>
+                    <li><a href="/baseinfo/" class="l1">
+                        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                        基本信息
+                    </a></li>
+
+                </ul>
+                <ul>
+                    <span>预约管理</span>
+                    <li><a href="#" class="l1">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        我的预约</a></li>
+                    <li><a href="#" class="l1">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        实验设备预约</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mmain">
+
+            <div class="mm-information">
+                <div class="mm-information-title">
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                        设备信息
+                </div>
+                <p>对不起，你暂无权限使用此设备<br>
+                    请联系管理员！
+                </p>
+                <a href="/indextest/"><button >返回</button></a>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="footer">
+        <li>
+            <i class="fa fa-university" aria-hidden="true">
+                西安交通大学材料学院实验室预约&nbsp;&nbsp;&nbsp;
+            </i>
+            <i class="fa fa-comments" aria-hidden="true">
+                联系人:徐老师&nbsp;联系方式:xxx-xxxxxx
+            </i>
+        </li>
+    </div>
+</body>
+</html>

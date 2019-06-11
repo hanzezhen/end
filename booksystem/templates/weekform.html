@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>本周设备申请</title>
+    <script src="/static/js/jQuery.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/core.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/table2excel.min.js" type="text/javascript" charset="UTF-8"></script>
+
+    <script src="/static/js/jsi18n.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/calendar.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/DateTimeShortcuts.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="/static/js/weekform.js" type="text/javascript" charset="UTF-8"></script>
+
+    <link href="/static/css/base.css" rel="stylesheet" type="text/css" >
+    <link href="/static/css/widgets.css" rel="stylesheet" type="text/css" >
+    <!--<link href="/static/css/forms.css" rel="stylesheet" type="text/css" >-->
+
+    <style type="text/css">
+	body{padding: 0px;margin: 0px;font-size: 12px;font-family: "微软雅黑";}
+	.ui-dialog{
+		width: 380px;height: auto;display: none;
+		position: absolute;z-index: 9000;
+		top: 0px;left: 0px;
+		border: 1px solid #D5D5D5;background: #fff;
+	}
+	.ui-dialog a{text-decoration: none;}
+    td{
+        border-left: 1px solid #e6e6e6;
+    }
+    /*鼠标放上去便小手*/
+    a{
+        cursor: pointer;
+    }
+   #headtr>th>div  > span{
+       padding-left: 0px;
+   }
+
+   .datetimeshortcuts>a>img{
+       vertical-align: middle;
+   }
+
+</style>
+</head>
+<body>
+<div id="header">
+        <div id="branding">
+<h1 id="site-name"><span style="cursor: default" >材料学院设备信息管理系统</span></h1>
+        </div>
+        <div id="user-tools">
+                <span style="cursor: default">欢迎，</span>
+                <strong style="cursor: default">管理员</strong>.
+                    <a href="/">查看站点</a> /
+                <a href="/admin/password_change/">修改密码</a> /
+                <a href="/admin/logout/">注销</a>
+        </div>
+    </div>
+<div class="breadcrumbs">
+        <a href="/foradmin2/">首页</a>
+            › 设备用时报表
+</div>
+<div id="content" class="flex">
+    <h1>设备用时报表</h1>
+     <div id="content-main">
+     <div id="toolbar">
+         <form id="changelist-search" action="" method="get" onsubmit="return check1()">
+         <div><!-- DIV needed for valid HTML -->
+            <label for="name"><span>设备:</span></label>
+                <input type="text" size="10" name="name" id="name" value={{queryname}} >
+
+               &nbsp;&nbsp;&nbsp;&nbsp;
+
+         <!--</div>-->
+
+             <!--<div>&lt;!&ndash; DIV needed for valid HTML &ndash;&gt;-->
+            <label class="required" for="searchbar0"><span>开始日期:</span></label>
+                <input type="text" class="vDateField" size="10" name="timestart" id="searchbar0" placeholder="2019/01/01" value={{startquery}}>
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             <label class="required" for="searchbar1"><span>终止日期:</span></label>
+                <input type="text" class="vDateField" size="10" name="timeend" id="searchbar1" placeholder="今天" value={{endquery}}>
+&nbsp;       &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="searchcommit" style="cursor: pointer" type="submit" value="搜索">
+                <input id="errorinfo" style="color:red;border: 0px">
+             <a style="float: right;padding-top: 2px;padding-bottom: 2px" class="button" href="/weekform/" >全部显示</a>
+         </div>
+
+         </form>
+     </div>
+     <div id="changelist" class="module">
+     <div id="firsttable">
+     <table id="table1" style="width: 100%">
+       <thead>
+<tr id="headtr">
+<th scope="col" class="">
+   <div class="text"><span style="padding-left: 0px">编号</span></div>
+   <div class="clear"></div>
+</th>
+<th scope="col" class="">
+   <div class="text"><span id="shebeiid">设备</span></div>
+   <div class="clear"></div>
+</th>
+
+    <th scope="col" class="">
+   <div class="text"><span id="startdate">开始日期</span></div>
+   <div class="clear"></div>
+</th>
+
+    <th scope="col" class="">
+   <div class="text"><span id="enddate">终止日期</span></div>
+   <div class="clear"></div>
+</th>
+
+<th scope="col" class="">
+   <div class="text"><span>时长</span></div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+       <tbody>
+            {% for shebei in shebeis %}
+                  {% if forloop.counter|divisibleby:2 %}
+                      <tr class="row2">
+                  {% else %}
+                      <tr class="row1">
+                  {% endif %}
+                <td><span  class="">{{shebei.tid}}</span></td>
+                <td><span  class="">{{shebei.tname}}</span></td>
+                <td><span  class="">{{starttime}}</span></td>
+                <td><span  class="">{{endtime}}</span></td>
+
+                <td><span  class="">{{shebei.sum_shichang}}</span></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+     </div>
+     </div>
+         <div style="width: 100%">
+            <a style="float: right;padding-top: 2px;padding-bottom: 2px" class="button" href="javascript:download();">下载当前表</a>
+         </div>
+     </div>
+</div>
+
+
+
+
+
+</body>
+</html>

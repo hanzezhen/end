@@ -1,0 +1,29 @@
+{% extends 'mother.html' %}
+
+{% load static from staticfiles %}
+<link  rel="stylesheet" href="{% static 'css/home2.css' %}"/>
+
+{% block main %}
+ <div class="middle1">
+    <div class="information">
+        <h1>{{ susername }}&nbsp;的个人信息</h1>
+        <ul>
+            <li>姓名：{{ student.sname }}</li>
+            <li>用户名：{{ student.susername }}</li>
+            <li>密码：{{ student.spassword }}</li>
+            <li>学号：{{ student.sidnumber }}</li>
+            <li>电话号码：{{ student.sphonenumber }}</li>
+        </ul>
+    </div>
+    <div class="date">
+        <h1>可预约的实验室</h1>
+        <ul>
+            {% for ep in equipment %}
+            <a href='/{{ ep }}'>
+                {{ ep }}
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+ </div>
+{% endblock main %}

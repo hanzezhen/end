@@ -1,0 +1,34 @@
+{% extends 'mother.html' %}
+
+{% block main %}
+ <div class="appointment">
+        <h1>实验设备预约:{{ ep }}</h1>
+        <table border="1">
+            <tr>
+                <th>时间\日期</th>
+                {% for item in date1 %}
+                    <th>
+                    {{ item }}
+                    </th>
+                {% endfor %}
+            </tr>
+            {% for ais in s %}
+            <tr>
+                <td>{{ ais|add:7 }}:00-{{ ais|add:8 }}:00</td>
+                {% for i in t %}
+                    <td>
+                    empty
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </table>
+    <a href="/home2/">
+        返回
+    </a>
+    <style>
+
+    </style>
+    </div>
+{% endblock %}
